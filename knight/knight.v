@@ -25,8 +25,7 @@ module knight # (
 		 )
    (
     output reg [WIDTH-1:0] led,
-    input 		   clk_src,
-    input wire [23:0] 	   divider
+    input 		   clk_in
     //	   input 	    reset
     );
    
@@ -35,9 +34,7 @@ module knight # (
    wire 		clk;
    
 
-   variable_divider #(24) div(.clk_in(clk_src), .load(divider), .clk_out(clk));
-
-   always @(posedge clk) begin
+   always @(posedge clk_in) begin
       if (dir == 1) begin
 	 if (led == 0)
 	   led <= 1;
