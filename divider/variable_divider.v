@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////
+//
+// f_{out} = f_{in}/2(N+1)
+//
 module variable_divider #
   (
    parameter integer WIDTH = 24
