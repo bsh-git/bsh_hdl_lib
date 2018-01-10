@@ -2,7 +2,7 @@
 //
 // f_{out} = f_{in}/2(N+1)
 //
-module variable_divider #
+module divider #
   (
    parameter integer WIDTH = 24
    )
@@ -25,7 +25,7 @@ module variable_divider #
       end
    end
 
-   
-endmodule
+endmodule // divider
+
    
 				  
