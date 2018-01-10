@@ -2,6 +2,10 @@
 //
 // Pulse Width Modulator
 //
+//  |~~~~~~~~~~~~~~~~|_____|~~~~~~~~~~~~~~~~|_____
+//  | <- wave_length     ->|
+//  | <- high_time ->|
+//
 
 module pwd #
   (
@@ -9,36 +13,23 @@ module pwd #
    )
    (
     input clk,
-    input [WIDTH-1:0] low_time,
+    input [WIDTH-1:0] wave_length,
     input [WIDTH-1:0] high_time,
     output reg out
     );
 
 
-   reg [WIDTH-1:0] counter = 0;
+   reg [WIDTH-1:0] counter = ~0;
 
    always @(posedge clk) begin
-      if (high_time == 0)
+      counter = counter + 1;
+      if (counter == high_time)
 	out = 0;
-      else if (low_time == 0)
-	out = 1;
-      else if (out == 0) begin
-	 if (counter != low_time)
-	    counter = counter + 1;
-	 else begin
-	    counter = 0;
-	    out = 1;
-	 end
-      end
-      else begin
-	 if (counter != high_time)
-	    counter = counter + 1;
-	 else begin
-	    counter = 0;
-	    out = 0;
-	 end
-
-      end
+      if (counter == wave_length) begin
+	 counter = 0;
+	 if (high_time != 0)
+	   out = 1;
+      end	 
    end
    
 endmodule
