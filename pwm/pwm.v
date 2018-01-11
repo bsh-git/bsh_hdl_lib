@@ -17,17 +17,21 @@ module pwd #
     input [WIDTH-1:0] wave_length,
     input [WIDTH-1:0] high_time,
     output reg out,
-    output reg last_cycle
+    output last_cycle
     );
 
 
-   reg [WIDTH-1:0] counter = ~0;
+   (* mark_debug = "TRUE" *) reg [WIDTH-1:0] counter = -1;
+   reg 	   last = 0;
 
+   assign counter_out = counter;
+   assign last_cycle = last;
+   
    always @(posedge clk) begin
       counter = counter + 1;
       
       if (counter == 0) begin
-	 last_cycle <= 0;
+	 last <= 0;
 	 if (high_time != 0)
 	   out <= 1;
       end
@@ -35,10 +39,11 @@ module pwd #
       if (counter == high_time)
 	out <= 0;
       if (counter == wave_length) begin
-	 counter <= ~0;
-	 last_cycle <= 1;
+	 counter <= -1;
+	 last <= 1;
       end
       
    end
+
 endmodule
 	     
