@@ -8,7 +8,7 @@
 //  | <- high_time ->|
 //
 
-module pwd #
+module pwm #
   (
    parameter integer WIDTH = 16
    )
