@@ -21,7 +21,7 @@ module pwm #
     );
 
 
-   (* mark_debug = "TRUE" *) reg [WIDTH-1:0] counter = -1;
+   reg [WIDTH-1:0] counter = -1;
    reg 	   last = 0;
 
    assign counter_out = counter;
