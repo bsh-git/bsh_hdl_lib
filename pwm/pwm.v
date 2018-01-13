@@ -24,7 +24,6 @@ module pwm #
    reg [WIDTH-1:0] counter = -1;
    reg 	   last = 0;
 
-   assign counter_out = counter;
    assign last_cycle = last;
    
    always @(posedge clk) begin
