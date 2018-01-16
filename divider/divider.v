@@ -9,10 +9,12 @@ module divider #
    (
     input 	      clk_in,
     input [WIDTH-1:0] load, 
-    output reg 	      clk_out 
+    output wire 	      clk_out 
     );
 
-   reg [WIDTH-1:0] 	    counter;
+   reg [WIDTH-1:0] 	    counter = 0;
+   reg val = 0;
+   assign clk_out = val;
 
    always @(posedge clk_in) begin
       
@@ -20,7 +22,7 @@ module divider #
 	counter <= counter -1;
       else begin
 	 counter <= load;
-	 clk_out <= ~clk_out;
+	 val <= ~val;
 
       end
    end
