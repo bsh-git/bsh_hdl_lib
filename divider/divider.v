@@ -2,32 +2,26 @@
 //
 // f_{out} = f_{in}/2(N+1)
 //
-module divider #
-  (
-   parameter integer WIDTH = 24
-   )
-   (
-    input 	      clk_in,
-    input [WIDTH-1:0] load, 
-    output wire 	      clk_out 
-    );
+module divider #(  parameter integer WIDTH = 24)
+    (
+     input             clk_in,
+     input [WIDTH-1:0] load,
+     output            clk_out
+     );
 
-   reg [WIDTH-1:0] 	    counter = 0;
-   reg val = 0;
-   assign clk_out = val;
+    reg [WIDTH-1:0]    counter = 0;
+    reg                val = 0;
 
-   always @(posedge clk_in) begin
-      
-      if (counter != 0)
-	counter <= counter -1;
-      else begin
-	 counter <= load;
-	 val <= ~val;
+    assign clk_out = val;
 
-      end
-   end
+    always @(posedge clk_in) begin
+        if (counter != 0)
+            counter <= counter -1;
+        else begin
+            counter <= load;
+            val <= ~val;
+        end
+
+    end
 
 endmodule // divider
-
-   
-				  
