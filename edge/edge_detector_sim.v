@@ -7,14 +7,14 @@ module edge_detector_sim ();
     reg sig = 0;
     reg rst_n = 0;
 
-    wire det;
+    wire r, f;
 
     always #2 begin
         clk  <= !clk;
     end
 
 
-    edge_detector dector(sig, clk, rst_n, det);
+    edge_detector dector(sig, clk, rst_n, r, f);
 
     initial begin
         $display("simulation start");
@@ -32,6 +32,11 @@ module edge_detector_sim ();
         #10 rst_n = 1;
         #10 sig = 0;
         #10 sig = 1;
+        #10 rst_n = 0;
+        #10 sig = 0;
+        #10 rst_n = 1;
+        #10 sig = 1;
+        #10 sig = 0;
         $display("simulation end");
     end // initial begin
 

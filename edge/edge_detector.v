@@ -3,15 +3,16 @@ module edge_detector
      input wire  sig_in,
      input wire  clk,
      input wire  reset_n,
-     output wire sig_out);
+     output wire rising,
+     output wire falling);
 
     reg         delay0 = 0;
     reg         delay1 = 0;
 
     always @(posedge clk) begin
         if (!reset_n) begin
-            delay0 <= 0;
-            delay1 <= 0;
+            delay0 <= sig_in;
+            delay1 <= sig_in;
         end
         else begin
             delay0 <= sig_in;
@@ -19,5 +20,6 @@ module edge_detector
         end
     end
 
-    assign sig_out = delay0 & !delay1;
+    assign rising = delay0 & !delay1;
+    assign falling = !delay0 & delay1;
 endmodule; // edge_detector
