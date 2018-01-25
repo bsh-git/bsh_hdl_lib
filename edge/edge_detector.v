@@ -22,4 +22,4 @@ module edge_detector
 
     assign rising = delay0 & !delay1;
     assign falling = !delay0 & delay1;
-endmodule; // edge_detector
+endmodule // edge_detector
